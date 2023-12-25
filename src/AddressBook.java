@@ -19,7 +19,7 @@ class AddressBook {
     public void editContact(String name) {
         for (Contact contact : contacts) {
             if (contact.getFirstName().equalsIgnoreCase(name) || contact.getLastName().equalsIgnoreCase(name)) {
-                // Match found, allow editing
+               
                 Scanner scanner = new Scanner(System.in);
 
                 System.out.println("Enter new address:");
