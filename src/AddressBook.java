@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 class AddressBook {
     private List<Contact> contacts;
 
@@ -39,10 +41,28 @@ class AddressBook {
             }
         }
 
-        // If the loop completes, no matching contact found
+      
         System.out.println("No contact found with the name: " + name);
 
        
+    }
+    public void deleteContact(String name) {
+        int indexToDelete = -1;
+    
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact contact = contacts.get(i);
+            if (contact.getFirstName().equalsIgnoreCase(name) || contact.getLastName().equalsIgnoreCase(name)) {
+                indexToDelete = i;
+                break;
+            }
+        }
+    
+        if (indexToDelete != -1) {
+            contacts.remove(indexToDelete);
+            System.out.println("Contact deleted successfully!");
+        } else {
+            System.out.println("No contact found with the name: " + name);
+        }
     }
 
     public void displayContacts() {
