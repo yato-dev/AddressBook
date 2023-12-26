@@ -12,7 +12,7 @@ public class AddressBookMain {
             System.out.println("3. Exit");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:
