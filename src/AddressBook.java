@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 
@@ -66,6 +67,20 @@ class AddressBook {
         } else {
             System.out.println("No contact found with the name: " + name);
         }
+    }
+
+    public List<Contact> searchPersonsByCity(String city) {
+      
+        return contacts.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Contact> searchPersonsByState(String state) {
+      
+        return contacts.stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(state))
+                .collect(Collectors.toList());
     }
 
     public void displayContacts() {
