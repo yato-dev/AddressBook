@@ -82,6 +82,19 @@ public class Contact {
                 '}';
     }
 
+    @Override
+public boolean equals(Object obj) {
+    if (this == obj) {
+        return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+        return false;
+    }
+    Contact other = (Contact) obj;
+    return this.getFirstName().equalsIgnoreCase(other.getFirstName()) &&
+            this.getLastName().equalsIgnoreCase(other.getLastName());
+}
+
     
     
 }
