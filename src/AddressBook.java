@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,19 @@ class AddressBook {
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList());
     }
+
+    
+public Map<String, List<Contact>> getPersonsByCity() {
+
+    return contacts.stream()
+            .collect(Collectors.groupingBy(Contact::getCity));
+}
+
+public Map<String, List<Contact>> getPersonsByState() {
+    
+    return contacts.stream()
+            .collect(Collectors.groupingBy(Contact::getState));
+}
 
     public void displayContacts() {
         if (contacts.isEmpty()) {
