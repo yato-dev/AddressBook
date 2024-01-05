@@ -111,6 +111,18 @@ class AddressBook {
         contacts.sort(Comparator.comparing(Contact::getFirstName).thenComparing(Contact::getLastName));
     }
 
+    public void sortByCity() {
+        contacts.sort(Comparator.comparing(Contact::getCity));
+    }
+    
+    public void sortByState() {
+        contacts.sort(Comparator.comparing(Contact::getState));
+    }
+    
+    public void sortByZip() {
+        contacts.sort(Comparator.comparing(Contact::getZip));
+    }
+
     public void displayContacts() {
         if (contacts.isEmpty()) {
             System.out.println("Address book is empty.");
