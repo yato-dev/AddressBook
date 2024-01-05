@@ -12,10 +12,13 @@ class AddressBook {
     }
 
     public void addContact(Contact contact) {
-        contacts.add(contact);
-        System.out.println("Contact added successfully!");
+        if (!contacts.contains(contact)) {
+            contacts.add(contact);
+            System.out.println("Contact added successfully!");
+        } else {
+            System.out.println("Duplicate entry. Contact with the same name already exists.");
+        }
     }
-
     public void editContact(String name) {
         for (Contact contact : contacts) {
             if (contact.getFirstName().equalsIgnoreCase(name) || contact.getLastName().equalsIgnoreCase(name)) {
