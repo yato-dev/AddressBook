@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -121,6 +126,35 @@ class AddressBook {
     
     public void sortByZip() {
         contacts.sort(Comparator.comparing(Contact::getZip));
+    }
+
+    public void writeToFile(String filePath) {
+        try {
+            FileOutputStream writeData = new FileOutputStream("data.txt");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+
+            writeStream.writeObject(contacts);
+            writeStream.flush();
+            writeStream.close();
+            System.out.println("Contacts are write to file: " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void readFromFile(String filePath) {
+        try {
+            FileInputStream readData = new FileInputStream("data.txt");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+
+            ArrayList<Contact> contacts2 = (ArrayList<Contact>) readStream.readObject();
+            readStream.close();
+            contacts.addAll(contacts2);
+            System.out.println(contacts2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void displayContacts() {
