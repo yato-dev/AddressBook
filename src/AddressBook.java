@@ -1,10 +1,9 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-
-
 
 class AddressBook {
     private List<Contact> contacts;
@@ -21,10 +20,11 @@ class AddressBook {
             System.out.println("Duplicate entry. Contact with the same name already exists.");
         }
     }
+
     public void editContact(String name) {
         for (Contact contact : contacts) {
             if (contact.getFirstName().equalsIgnoreCase(name) || contact.getLastName().equalsIgnoreCase(name)) {
-               
+
                 Scanner scanner = new Scanner(System.in);
 
                 System.out.println("Enter new address:");
@@ -46,14 +46,13 @@ class AddressBook {
             }
         }
 
-      
         System.out.println("No contact found with the name: " + name);
 
-       
     }
+
     public void deleteContact(String name) {
         int indexToDelete = -1;
-    
+
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = contacts.get(i);
             if (contact.getFirstName().equalsIgnoreCase(name) || contact.getLastName().equalsIgnoreCase(name)) {
@@ -61,7 +60,7 @@ class AddressBook {
                 break;
             }
         }
-    
+
         if (indexToDelete != -1) {
             contacts.remove(indexToDelete);
             System.out.println("Contact deleted successfully!");
@@ -71,31 +70,46 @@ class AddressBook {
     }
 
     public List<Contact> searchPersonsByCity(String city) {
-      
+
         return contacts.stream()
                 .filter(contact -> contact.getCity().equalsIgnoreCase(city))
                 .collect(Collectors.toList());
     }
-    
+
     public List<Contact> searchPersonsByState(String state) {
-      
+
         return contacts.stream()
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList());
     }
 
-    
-public Map<String, List<Contact>> getPersonsByCity() {
+    public Map<String, List<Contact>> getPersonsByCity() {
 
-    return contacts.stream()
-            .collect(Collectors.groupingBy(Contact::getCity));
-}
+        return contacts.stream()
+                .collect(Collectors.groupingBy(Contact::getCity));
+    }
 
-public Map<String, List<Contact>> getPersonsByState() {
+    public Map<String, List<Contact>> getPersonsByState() {
+
+        return contacts.stream()
+                .collect(Collectors.groupingBy(Contact::getState));
+    }
+
+    public Map<String, Long> countPersonsByCity() {
+       
+        return contacts.stream()
+                .collect(Collectors.groupingBy(Contact::getCity, Collectors.counting()));
+    }
     
-    return contacts.stream()
-            .collect(Collectors.groupingBy(Contact::getState));
-}
+    public Map<String, Long> countPersonsByState() {
+ 
+        return contacts.stream()
+                .collect(Collectors.groupingBy(Contact::getState, Collectors.counting()));
+    }
+
+    public void sortByName() {
+        contacts.sort(Comparator.comparing(Contact::getFirstName).thenComparing(Contact::getLastName));
+    }
 
     public void displayContacts() {
         if (contacts.isEmpty()) {
